@@ -19,7 +19,10 @@
 # want you to use one for this, or Bias = 0, in other words.
 # You will need to train your perceptron.
 
+import random
+
 NUM_INPUTS = 4
+LEARNING_RATE = 0.1
 
 def createTestDataFile(filename, trainingData):
   with open(filename, 'w') as f:
@@ -70,8 +73,44 @@ def writeSolutionToFile(filename, solutionSet):
       f.write("]\n\n")
   return
 
-def trainData(trainingData):
-  pass
+def trainPerceptron(trainingData):
+
+  # initialize weights randomly
+  weights = [None] * NUM_INPUTS
+  for i in range(NUM_INPUTS):
+    weights[i] = random.uniform(-1, 1)
+
+  print ("initially, weights are " + str(weights))
+
+  trainingComplete = False
+
+  while trainingComplete == False:
+    trainingComplete = True # assume weights are good unless find a case where trained guess different from target
+
+    for dataSet in trainingData:
+      target = dataSet[NUM_INPUTS] # last value is the correct 'OR' value
+
+      # compute answer using weights
+      computedAnswer = 0
+      for i in range(NUM_INPUTS):
+        computedAnswer += weights[i] * dataSet[i]
+
+      # compute error
+      error = target - computedAnswer
+
+      # classify as 1 or 0 based on computed answer
+      if computedAnswer > 0:
+        computedAnswer = 1
+      else:
+        computedAnswer = 0
+
+      if computedAnswer != target:
+        trainingComplete = False
+        # adjust weights accordingly
+        for i in range(NUM_INPUTS):
+          weights[i] += LEARNING_RATE * dataSet[i] * error
+
+  print "done training"
 
 def classifyData():
   pass
@@ -94,7 +133,7 @@ def main():
 
 
   #train perceptrons to get weights
-  trainData(trainingData)
+  trainPerceptron(trainingData)
 
   #use weights to classify input file
 
