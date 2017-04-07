@@ -2,7 +2,7 @@
 # Perceptron OR rule
 # Assignment 4
 # due April 4th 2017
-# by Anna Ilina (10150979) and Jake Pittis (10148335)
+# by Anna Ilina (10150979) and Jake Pittis (
 
 import random
 
@@ -69,7 +69,8 @@ def trainPerceptron(trainingData):
   for i in range(NUM_INPUTS):
     weights[i] = random.uniform(-1, 1)
 
-  # Loop through the training dataset and adjust weights until the you get through a run through the entire dataset with no incorrect classifications
+  # Loop through the training dataset and adjust weights until the you get
+  # through a run through the entire dataset with no incorrect classifications
   trainingComplete = False
   while trainingComplete == False:
     # Assume weights are good unless find a case where trained guess different from target
@@ -134,7 +135,7 @@ def main():
   #train perceptrons to get weights
   weights = trainPerceptron(trainingData)
 
-  # test that it's working
+  # test that it's working - yes
   # createTestDataFile(testFile, trainingData)
   # testCases = readDataFromFile(testFile)
   # solution = classifyData(testCases, weights)
@@ -144,6 +145,8 @@ def main():
   testCases = readDataFromFile(inFile)
   solution = classifyData(testCases, weights)
   writeSolutionToFile("out.txt", solution)
+
+  print "solution output to \"out.txt\""
 
   return
 
