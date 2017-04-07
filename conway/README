@@ -2,4 +2,5 @@
 `pip3 install -r requirements.txt`
 
 ## Run
-`python3 conway.py`
+`python3 conway.py in.txt` will launch a graphical display without any textual
+output.
