@@ -19,58 +19,82 @@
 # want you to use one for this, or Bias = 0, in other words.
 # You will need to train your perceptron.
 
-#in.txt() and out.txt()
-
-import itertools
-
 NUM_INPUTS = 4
 
-def createTrainingDataFile():
+def createTestDataFile(filename, trainingData):
+  with open(filename, 'w') as f:
+    for testcase in trainingData:
+      f.write("[")
+      i = 0
+      for i in range(NUM_INPUTS): # don't read the solution (last value in length 5 array)
+        f.write(str(testcase[i]))
+        if i != NUM_INPUTS - 1:
+          f.write(" ")
+      f.write("]\n\n")
+  return
 
+def createTrainingData():
   numTrainingSets = 2**NUM_INPUTS
-
   trainingData = [None] * (numTrainingSets) # each input has 2 options: 1 or 0
-
-  #for i in range(numTrainingSets):
-  #  pass
-
   i = 0
   for x1 in range(2):
     for x2 in range(2):
       for x3 in range(2):
         for x4 in range(2):
-          input = [x1, x2, x3, x4]
-          trainingData[i] = input
+          orSolution = x1 or x2 or x2 or x3
+          testcase = [x1, x2, x3, x4, orSolution]
+          trainingData[i] = testcase
           i += 1
+  return trainingData
 
-  print(trainingData)
-  print(len(trainingData))
+def readDataFromFile(filename):
+  with open(filename, 'r') as f:
+    inputLinesFromFile = f.readlines()
+  inputCases = []
+  for line in inputLinesFromFile:
+    if line != "" and line.isspace() == False: # skip blank lines
+      inputSet = [None] * NUM_INPUTS
+      i = 0
+      for literal in line:
+        if literal != "[" and literal != "]" and literal.isspace() == False:
+          inputSet[i] = int(literal)
+          i += 1
+      inputCases.append(inputSet)
+  return inputCases
 
+def writeSolutionToFile(filename, solutionSet):
+  with open(filename, 'w') as f:
+    for solution in solutionSet:
+      f.write("[")
+      f.write(str(solution))
+      f.write("]\n\n")
+  return
 
-  # trainingData = [x for x in itertools.permutations('11110000', 4)]
-  # print(len(trainingData))
-
-  pass
-
-def readDataFromFile():
-  pass
-
-def trainData():
+def trainData(trainingData):
   pass
 
 def classifyData():
   pass
 
-def writeSolutionToFile():
-  pass
-
 
 def main():
 
+  testFile = "testFile.txt"
+
+  inFile = "in.txt"
+  outFile = "out.txt"
+
   #read tranining data from file
-  createTrainingDataFile()
+  trainingData = createTrainingData()
+
+
+  #createTestDataFile(testFile, trainingData)
+  #testCases = readDataFromFile(testFile)
+  #print testCases
+
 
   #train perceptrons to get weights
+  trainData(trainingData)
 
   #use weights to classify input file
 
