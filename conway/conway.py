@@ -1,3 +1,7 @@
+# CISC 352 AI Assignment 4
+# Anna Ilina (10148335)
+# Jake Pittis (10148335)
+
 import pyglet
 import random
 from copy import deepcopy
