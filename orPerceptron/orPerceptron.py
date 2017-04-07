@@ -44,7 +44,7 @@ def createTrainingData():
     for x2 in range(2):
       for x3 in range(2):
         for x4 in range(2):
-          orSolution = x1 or x2 or x2 or x3
+          orSolution = x1 or x2 or x3 or x4
           testcase = [x1, x2, x3, x4, orSolution]
           trainingData[i] = testcase
           i += 1
@@ -91,15 +91,15 @@ def trainPerceptron(trainingData):
       target = dataSet[NUM_INPUTS] # last value is the correct 'OR' value
 
       # compute answer using weights
-      computedAnswer = 0
+      computed = 0
       for i in range(NUM_INPUTS):
-        computedAnswer += weights[i] * dataSet[i]
+        computed += weights[i] * dataSet[i]
 
       # compute error
-      error = target - computedAnswer
+      error = float(target) - computed
 
       # classify as 1 or 0 based on computed answer
-      if computedAnswer > 0:
+      if computed > 0:
         computedAnswer = 1
       else:
         computedAnswer = 0
@@ -125,6 +125,8 @@ def main():
 
   #read tranining data from file
   trainingData = createTrainingData()
+
+  print(trainingData)
 
 
   #createTestDataFile(testFile, trainingData)
