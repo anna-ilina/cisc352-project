@@ -2,7 +2,7 @@
 # Perceptron OR rule
 # Assignment 4
 # due April 4th 2017
-# by Anna Ilina (10150979) and Jake Pittis (
+# by Anna Ilina and Jake Pittis
 
 import random
 
